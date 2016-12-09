@@ -1,5 +1,5 @@
 <?php
-namespace Application\Dispatcher\Listener;
+namespace Application\CommandBus\Listener;
 
 use Application\Domain\Event\SubmitLink as SubmitLinkEvent;
 use Application\Domain\Gateway\LinkWrite;

@@ -1,26 +1,26 @@
 <?php
-namespace Application\Dispatcher\Gateway;
+namespace Application\CommandBus\Gateway;
 
 use Application\Domain\Event\SubmitLink;
 use Application\Domain\Gateway\LinkEvent as LinkEventInterface;
-use Cadre\Dispatcher\Dispatcher;
 use DateTime;
 use DateTimeZone;
+use League\Tactician\CommandBus;
 
 class LinkEvent implements LinkEventInterface
 {
-    private $dispatcher;
+    private $commandBus;
 
-    public function __construct(Dispatcher $dispatcher)
+    public function __construct(CommandBus $commandBus)
     {
-        $this->dispatcher = $dispatcher;
+        $this->commandBus = $commandBus;
     }
 
     public function submit($title, $url, $submitterId)
     {
         $created = new DateTime('now', new DateTimeZone('UTC'));
 
-        $this->dispatcher->dispatch(new SubmitLink(
+        $this->commandBus->handle(new SubmitLink(
             $title,
             $url,
             $submitterId,

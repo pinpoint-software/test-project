@@ -23,6 +23,7 @@ class Core extends Module
     {
         return [
             AtlasOrm::class,
+            Tactician::class,
             Twig::class,
         ];
     }

@@ -3,7 +3,7 @@ namespace Application\Module;
 
 use Application\AtlasOrm\Gateway\LinkReadOnly;
 use Application\AtlasOrm\Gateway\UserReadOnly;
-use Application\Dispatcher\Gateway\LinkEvent;
+use Application\CommandBus\Gateway\LinkEvent;
 use Aura\Di\Container;
 use Cadre\Module\Module;
 use Application\Delivery\Input;

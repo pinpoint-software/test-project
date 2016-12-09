@@ -2,29 +2,19 @@
 namespace Application\Module;
 
 use Application\AtlasOrm\Gateway\LinkWrite;
-use Application\Dispatcher\Gateway\LinkEvent;
-use Application\Dispatcher\Listener\SubmitLink as SubmitLinkListener;
+use Application\CommandBus\Gateway\LinkEvent;
+use Application\CommandBus\Listener\SubmitLink as SubmitLinkListener;
 use Application\Domain\Event\SubmitLink as SubmitLinkEvent;
 use Aura\Di\Container;
-use Cadre\Dispatcher\MemoryDispatcher;
 use Cadre\Module\Module;
-use Application\Service\Login\Submit;
+use League\Tactician\CommandBus;
 
 class Domain extends Module
 {
     public function define(Container $di)
     {
         $di->params[LinkEvent::class] = [
-            'dispatcher' => $di->lazyNew(MemoryDispatcher::class),
-        ];
-
-        $di->setters[MemoryDispatcher::class] = [
-            'addMultiple' => $di->lazyArray([
-                $di->lazyArray([
-                    'class' => SubmitLinkEvent::class,
-                    'listener' => $di->lazyNew(SubmitLinkListener::class),
-                ]),
-            ]),
+            'commandBus' => $di->lazyNew(CommandBus::class),
         ];
 
         $di->params[SubmitLinkListener::class] = [
