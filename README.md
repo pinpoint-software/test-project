@@ -11,8 +11,8 @@ practices that we use in our production applications.
 problems. I will expect that you can explain to me what you've tried and what
 steps you've taken on your own to troubleshoot the issue.**
 
-**This project is just as much to see how well you communicate about issues as
-it is about your abilities as a PHP developer.**
+**This project is just as much (if not more so) to see how well you communicate
+about issues as it is about your abilities as a PHP developer.**
 
 ## Installation
 
