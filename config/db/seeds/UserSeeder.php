@@ -14,6 +14,10 @@ class UserSeeder extends AbstractSeed
      */
     public function run()
     {
+        $rows = $this->fetchRow('SELECT COUNT(*) as `c` FROM `users`');
+
+        if (0 === intval($rows['c'])):
+
         $data = array(
           array(
               'email' => 'admin@pinpointsoftware.co',
@@ -27,5 +31,7 @@ class UserSeeder extends AbstractSeed
 
         $users = $this->table('users');
         $users->insert($data)->save();
+
+        endif;
     }
 }

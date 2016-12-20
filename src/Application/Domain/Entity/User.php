@@ -32,11 +32,11 @@ class User
         $this->updated = $updated;
     }
 
-    public static function createUser($username, $password, $firstName, $lastName)
+    public static function createUser($email, $password, $firstName, $lastName)
     {
         $updated = $created = new DateTime('now', new DateTimeZone('UTC'));
         $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-        return new static(null, $username, $hashedPass, $firstName, $lastName, $created, $updated);
+        return new static(null, $email, $hashedPass, $firstName, $lastName, $created, $updated);
     }
 
     public function id()

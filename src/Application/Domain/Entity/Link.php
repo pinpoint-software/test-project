@@ -29,7 +29,7 @@ class Link
         $this->updated = $updated;
     }
 
-    public static function createUser($title, $url, User $submitter)
+    public static function createLink($title, $url, User $submitter)
     {
         $updated = $created = new DateTime('now', new DateTimeZone('UTC'));
         return new static(null, $title, $url, $submitter, $created, $updated);

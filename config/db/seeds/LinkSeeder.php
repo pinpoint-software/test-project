@@ -14,6 +14,10 @@ class LinkSeeder extends AbstractSeed
      */
     public function run()
     {
+        $rows = $this->fetchRow('SELECT COUNT(*) as `c` FROM `links`');
+
+        if (0 === intval($rows['c'])):
+
         $data = array(
           array(
               'title' => 'Pinpoint Software',
@@ -47,5 +51,7 @@ class LinkSeeder extends AbstractSeed
 
         $links = $this->table('links');
         $links->insert($data)->save();
+
+        endif;
     }
 }

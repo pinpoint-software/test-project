@@ -10,6 +10,7 @@
         "league/tactician": "^1.0",
         "maximebf/debugbar": "^1.13",
         "oscarotero/psr7-middlewares": "^3.18",
+        "owasp/phprbac": "^2.0",
         "radar/adr": "^1.1",
         "relay/middleware": "^1.1",
         "robmorgan/phinx": "^0.6",
