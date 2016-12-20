@@ -45,7 +45,7 @@ If you'd prefer to manually install the application these are the steps:
 4. Copy `config/phinx.dist.php` to `config/phinx.php` and configure the
    database credentials
 5. Make sure you have [composer](https://getcomposer.org/),
-   [Node.js](https://nodejs.org/en/), [gulp](http://gulpjs.com/), and
+   [node.js](https://nodejs.org/en/), [gulp](http://gulpjs.com/), and
    [bower](https://bower.io/) installed
 6. Run `composer install`
 7. Run `bower install`
@@ -77,7 +77,7 @@ fine.
 This should be done in a fork of this repo (see
 [Forking Projects](https://guides.github.com/activities/forking/)).
 
-
+When you're done, submit a [pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
 ### Architecture
 
@@ -127,3 +127,12 @@ I explain ADR and how Radar implements it in my blog post
 My blog [FutureProof PHP](https://www.futureproofphp.com/) can also be considered
 further documentation of how I think about software development and in particular
 the libraries I've built and use in this application.
+
+### Other Significant Information
+
+We use [Phinx](https://phinx.org/) for database migrations. It is available via
+`vendor/bin/phinx` once you've done a `composer install`. Any database changes
+you make need to be committed to your repo as phinx migrations.
+
+Bonus points for unit tests, but at this stage of the game it's not a requirement
+especially for code that interacts with the database.
