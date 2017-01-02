@@ -12,7 +12,7 @@ class LinkSubmit
         $this->linkGateway = $linkGateway;
     }
 
-    public function __invoke($title, $url, $submitterId)
+    public function __invoke($title, $url, $text, $submitterId)
     {
         if (empty($submitterId)) {
             $payload = [
@@ -28,7 +28,7 @@ class LinkSubmit
             $payload = [
                 'success' => true,
             ];
-            $this->linkGateway->submit($title, $url, $submitterId);
+            $this->linkGateway->submit($title, $url, $text, $submitterId);
         }
 
         return $payload;

@@ -3,6 +3,7 @@ namespace Application\Module;
 
 use Application\AtlasOrm\Gateway\LinkReadOnly;
 use Application\AtlasOrm\Gateway\UserReadOnly;
+use Application\AtlasOrm\Gateway\TextReadOnly;
 use Application\CommandBus\Gateway\LinkEvent;
 use Aura\Di\Container;
 use Cadre\Module\Module;
@@ -24,6 +25,10 @@ class Routing extends Module
 
         $di->params[Service\LoginSubmit::class] = [
             'userGateway' => $di->lazyNew(UserReadOnly::class),
+        ];
+        
+        $di->params[Service\LinkText::class] = [
+            'textGateway' => $di->lazyNew(TextReadOnly::class),
         ];
     }
 
@@ -52,5 +57,9 @@ class Routing extends Module
         $adr->post('LinkSubmit', '/submit/', Service\LinkSubmit::class)
             ->input(Input\LinkSubmit::class)
             ->responder(Responder\GenericRedirect::class);
+        
+        $adr->get('LinkText', '/text/{id}/', Service\LinkText::class)
+            ->input(Input\LinkText::class)
+            ->defaults(['_view' => 'text.html.twig']);
     }
 }

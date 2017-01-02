@@ -4,12 +4,12 @@ namespace Application\AtlasOrm\Gateway;
 use Application\AtlasOrm\DataSource\Link\LinkMapper;
 use Application\Domain\Entity\Link;
 use Application\Domain\Entity\User;
-use Application\Domain\Gateway\LinkReadOnly as LinkReadOnlyGateway;
+use Application\Domain\Gateway\TextReadOnly as TextReadOnlyGateway;
 use Atlas\Orm\Atlas;
 use DateTime;
 use DateTimeZone;
 
-class LinkReadOnly implements LinkReadOnlyGateway
+class TextReadOnly implements TextReadOnlyGateway
 {
     private $atlas;
 
@@ -18,22 +18,18 @@ class LinkReadOnly implements LinkReadOnlyGateway
         $this->atlas = $atlas;
     }
 
-    public function getRecentLinks()
+    public function getLink($id)
     {
-        $links = [];
+        $link = null;
 
-        $linkRecordSet = $this->atlas
+        $linkRecord = $this->atlas
             ->select(LinkMapper::class)
-            ->orderBy([
-                'created DESC',
-            ])
-            ->with([
-                'submitter',
-            ])
-            ->fetchRecordSet();
+            ->where('id = ?', $id)
+            ->with(['submitter'])
+            ->fetchRecord();
 
-        foreach ($linkRecordSet as $linkRecord) {
-            $links[] = new Link(
+        if (false !== $linkRecord) {
+            $link = new Link(
                 $linkRecord->id,
                 $linkRecord->title,
                 $linkRecord->url,
@@ -51,7 +47,7 @@ class LinkReadOnly implements LinkReadOnlyGateway
                 new DateTime($linkRecord->updated, new DateTimeZone('UTC'))
             );
         }
-
-        return $links;
+        
+        return $link;
     }
 }
