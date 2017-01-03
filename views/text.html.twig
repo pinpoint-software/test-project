@@ -5,9 +5,13 @@
     <div class="panel-body">
         <h2>{{ link.title }}</h2>
     
+        {% if link.text is not empty %}
         <p class="panel-default">{{link.text}}</p>
+        {% endif %}
          
+        {% if link.url is not empty %}
         <a href="{{ link.url }}" class="list-group-item">{{ link.url }}</a>
+        {% endif %}
     </div>
     
     <p class="panel-footer">Submitted {{ link.created | time_diff | default('now') }} by {{ link.firstName }} {{ link.lastName }}</p>    

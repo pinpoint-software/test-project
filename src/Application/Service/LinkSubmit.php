@@ -19,10 +19,15 @@ class LinkSubmit
                 'success' => false,
                 'warning' => 'Must be logged in to submit links',
             ];
-        } elseif (empty($title) || empty($url)) {
+        } elseif (empty($title)) {
             $payload = [
                 'success' => false,
-                'warning' => 'Title and URL are required',
+                'warning' => 'Title is required',
+            ];
+        } elseif (empty($text) && empty($url)) {
+            $payload = [
+                'success' => false,
+                'warning' => 'URL or Description is required',
             ];
         } else {
             $payload = [

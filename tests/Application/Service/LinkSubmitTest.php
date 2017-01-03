@@ -32,7 +32,7 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $payload = ($service)('', 'http://example.com/', 'Description', '123');
 
         $this->assertFalse($payload['success']);
-        $this->assertEquals('Title and URL are required', $payload['warning']);
+        $this->assertEquals('Title is required', $payload['warning']);
     }
 
     public function testInvokeWithoutUrl()
@@ -42,8 +42,7 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $service = new LinkSubmit($linkGateway);
         $payload = ($service)('Example', '', 'Description', '123');
 
-        $this->assertFalse($payload['success']);
-        $this->assertEquals('Title and URL are required', $payload['warning']);
+        $this->assertTrue($payload['success']);
     }
 
     public function testInvokeWithoutSubmitter()
@@ -65,5 +64,16 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $payload = ($service)('Example', 'http://example.com/', '', '123');
 
         $this->assertTrue($payload['success']);
+    }
+    
+    public function testInvokeWithoutUrlOrDescription()
+    {
+        $linkGateway = $this->createMock(LinkEvent::class);
+
+        $service = new LinkSubmit($linkGateway);
+        $payload = ($service)('Example', '', '', '123');
+
+        $this->assertFalse($payload['success']);
+        $this->assertEquals('URL or Description is required', $payload['warning']);
     }
 }
