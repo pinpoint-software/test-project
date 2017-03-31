@@ -14,11 +14,12 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
             ->with(
                 $this->equalTo('Example'),
                 $this->equalTo('http://example.com/'),
+                $this->equalTo('Description'),
                 $this->equalTo('123')
             );
 
         $service = new LinkSubmit($linkGateway);
-        $payload = ($service)('Example', 'http://example.com/', '123');
+        $payload = ($service)('Example', 'http://example.com/', 'Description', '123');
 
         $this->assertTrue($payload['success']);
     }
@@ -28,10 +29,10 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $linkGateway = $this->createMock(LinkEvent::class);
 
         $service = new LinkSubmit($linkGateway);
-        $payload = ($service)('', 'http://example.com/', '123');
+        $payload = ($service)('', 'http://example.com/', 'Description', '123');
 
         $this->assertFalse($payload['success']);
-        $this->assertEquals('Title and URL are required', $payload['warning']);
+        $this->assertEquals('Title is required', $payload['warning']);
     }
 
     public function testInvokeWithoutUrl()
@@ -39,10 +40,9 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $linkGateway = $this->createMock(LinkEvent::class);
 
         $service = new LinkSubmit($linkGateway);
-        $payload = ($service)('Example', '', '123');
+        $payload = ($service)('Example', '', 'Description', '123');
 
-        $this->assertFalse($payload['success']);
-        $this->assertEquals('Title and URL are required', $payload['warning']);
+        $this->assertTrue($payload['success']);
     }
 
     public function testInvokeWithoutSubmitter()
@@ -50,9 +50,30 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
         $linkGateway = $this->createMock(LinkEvent::class);
 
         $service = new LinkSubmit($linkGateway);
-        $payload = ($service)('Example', 'http://example.com/', '');
+        $payload = ($service)('Example', 'http://example.com/', 'Description', '');
 
         $this->assertFalse($payload['success']);
         $this->assertEquals('Must be logged in to submit links', $payload['warning']);
+    }
+    
+    public function testInvokeWithoutDescription()
+    {
+        $linkGateway = $this->createMock(LinkEvent::class);
+
+        $service = new LinkSubmit($linkGateway);
+        $payload = ($service)('Example', 'http://example.com/', '', '123');
+
+        $this->assertTrue($payload['success']);
+    }
+    
+    public function testInvokeWithoutUrlOrDescription()
+    {
+        $linkGateway = $this->createMock(LinkEvent::class);
+
+        $service = new LinkSubmit($linkGateway);
+        $payload = ($service)('Example', '', '', '123');
+
+        $this->assertFalse($payload['success']);
+        $this->assertEquals('URL or Description is required', $payload['warning']);
     }
 }

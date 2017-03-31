@@ -20,6 +20,7 @@ class SubmitLink
         $this->linkGateway->create(
             $event->title(),
             $event->url(),
+            $event->text(),
             $event->submitterId(),
             new DateTime($event->created(), new DateTimeZone('UTC'))
         );

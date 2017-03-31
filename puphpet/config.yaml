@@ -21,7 +21,7 @@ vagrantfile:
                 machines:
                     vflm_1a24wmmg9ivx:
                         id: pinpoint
-                        hostname: pinpoint
+                        hostname: pinpoint.dev
                         network:
                             private_network: 192.168.56.101
                             forwarded_port:

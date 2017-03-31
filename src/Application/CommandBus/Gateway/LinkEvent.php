@@ -16,13 +16,14 @@ class LinkEvent implements LinkEventInterface
         $this->commandBus = $commandBus;
     }
 
-    public function submit($title, $url, $submitterId)
+    public function submit($title, $url, $text, $submitterId)
     {
         $created = new DateTime('now', new DateTimeZone('UTC'));
 
         $this->commandBus->handle(new SubmitLink(
             $title,
             $url,
+            $text,
             $submitterId,
             $created->format('Y-m-d H:i:s')
         ));

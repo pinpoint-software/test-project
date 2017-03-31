@@ -1,36 +1,33 @@
 <?php
 namespace Application\Service;
 
-use Application\Domain\Gateway\LinkReadOnly;
+use Application\Domain\Gateway\TextReadOnly;
 
-class LinkList
+class LinkText
 {
-    private $linkGateway;
+    private $textGateway;
 
-    public function __construct(LinkReadOnly $linkGateway)
+    public function __construct(TextReadOnly $textGateway)
     {
-        $this->linkGateway = $linkGateway;
+        $this->textGateway = $textGateway;
     }
 
-    public function __invoke()
+    public function __invoke($id)
     {
-        $links = $this->linkGateway->getRecentLinks();
+        $link = $this->textGateway->getLink($id);
 
         $payload = [
             'success' => true,
-            'links' => [],
-        ];
-
-        foreach ($links as $link) {
-            $payload['links'][] = [
+            'link' => [
                 'id' => $link->id(),
                 'title' => $link->title(),
                 'url' => $link->url(),
+                'text' => $link->text(),
                 'firstName' => $link->submitter()->firstName(),
                 'lastName' => $link->submitter()->lastName(),
                 'created' => $link->created(),
-            ];
-        }
+            ],
+        ];
 
         return $payload;
     }

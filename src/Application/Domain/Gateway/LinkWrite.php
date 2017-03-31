@@ -5,5 +5,5 @@ use DateTime;
 
 interface LinkWrite
 {
-    public function create($title, $url, $submitterId, DateTime $created);
+    public function create($title, $url, $text, $submitterId, DateTime $created);
 }
