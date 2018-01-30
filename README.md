@@ -7,7 +7,7 @@ It's designed to be a simple application following some of the standards and
 practices that we use in our production applications.
 
 **Please e-mail me at
-[shell@pinpointsoftware.co](mailto:shell@pinpointsoftware.co) if you run into
+[giss@pinpointsoftware.co](mailto:giss@pinpointsoftware.co) if you run into
 problems. I will expect that you can explain to me what you've tried and what
 steps you've taken on your own to troubleshoot the issue.**
 
