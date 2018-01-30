@@ -16,42 +16,22 @@ about issues as it is about your abilities as a PHP developer.**
 
 ## Installation
 
-### Vagrant Installation
+You'll need to have a PHP development environment to work on this project.
+At the very least you should have PHP 7.0 and MySQL 5.7.
 
-[Vagrant](https://www.vagrantup.com/) is probably the easiest way to get the app
-up and running. It uses [VirtualBox](https://www.virtualbox.org/wiki/VirtualBox)
-to create a development virtual machine.  If you have Vagrant and VirtualBox
-installed, you should be able to just run `vagrant up` and have a dev server
-boot up for you.
-
-To make things easier you will probably want to have the following Vagrant
-plugins installed:
-
--  [vagrant-hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
--  [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest)
-
-When you're done you should be able to go to
-[pinpoint.dev](http://pinpoint.dev/). If you didn't have vagrant-hostsupdater
-installed you may need to add a record for pinpoint.dev pointing to
-192.168.56.101 in your hosts file.
-
-### Manual Installation
-
-If you'd prefer to manually install the application these are the steps:
+>  A fairly simple way to get a compatible development environment setup is to
+>  use [Laravel Homestead](https://laravel.com/docs/5.5/homestead) which uses
+>  Vagrant and VirtualBox.
 
 1. Clone this git repo to your machine
 2. Point your web server at the `public` folder
 3. Create a new database (ideally MySQL, but SQLite should also work)
 4. Copy `config/phinx.dist.php` to `config/phinx.php` and configure the
    database credentials
-5. Make sure you have [composer](https://getcomposer.org/),
-   [node.js](https://nodejs.org/en/), [gulp](http://gulpjs.com/), and
-   [bower](https://bower.io/) installed
+5. Make sure you have [composer](https://getcomposer.org/) installed
 6. Run `composer install`
-7. Run `bower install`
-8. Run `gulp less`
-9. Run `vendor/bin/phinx migrate`
-10. Run `vendor/bin/phinx seed:run`
+7. Run `vendor/bin/phinx migrate`
+8. Run `vendor/bin/phinx seed:run`
 
 You should now have a running version of the application.
 

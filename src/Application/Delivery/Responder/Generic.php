@@ -11,12 +11,10 @@ class Generic implements ResponderAcceptsInterface
     protected $request;
     protected $response;
     protected $twig;
-    protected $debugbar;
 
-    public function __construct(Twig_Environment $twig, DebugBar $debugbar = null)
+    public function __construct(Twig_Environment $twig)
     {
         $this->twig = $twig;
-        $this->debugbar = $debugbar;
     }
 
     public static function accepts()
@@ -50,20 +48,6 @@ class Generic implements ResponderAcceptsInterface
     {
         $view = $this->request->getAttribute('_view', 'index.html.twig');
         $body = $this->twig->render($view, $data);
-
-        if (isset($this->debugbar)) {
-            $debugbarRenderer = $this->debugbar->getJavascriptRenderer();
-            $body = str_replace(
-                '<!-- DebugBar::renderHead -->',
-                str_replace(
-                    '/vendor/maximebf/debugbar/src/DebugBar/Resources',
-                    '/debugbar',
-                    $debugbarRenderer->renderHead()
-                ),
-                $body
-            );
-            $body = str_replace('<!-- DebugBar::render -->', $debugbarRenderer->render(), $body);
-        }
 
         $this->response = $this->response->withHeader('Content-Type', 'text/html');
         $this->response->getBody()->write($body);

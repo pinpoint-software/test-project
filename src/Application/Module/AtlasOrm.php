@@ -3,8 +3,6 @@ namespace Application\Module;
 
 use Atlas\Orm\AtlasContainer;
 use Aura\Di\Container;
-use Cadre\AtlasOrmDebugBarBridge\AtlasContainer as DebugAtlasContainer;
-use Cadre\AtlasOrmDebugBarBridge\AtlasOrmCollector;
 use Cadre\Module\Module;
 
 class AtlasOrm extends Module
@@ -12,9 +10,6 @@ class AtlasOrm extends Module
     public function define(Container $di)
     {
         $atlasContainerClass = AtlasContainer::class;
-        if ($this->loader()->loaded(DebugBar::class)) {
-            $atlasContainerClass = DebugAtlasContainer::class;
-        }
 
         $di->set('atlas:container', $di->lazyNew($atlasContainerClass));
         $di->set('atlas', $di->lazyGetCall('atlas:container', 'getAtlas'));

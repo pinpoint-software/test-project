@@ -28,25 +28,13 @@ class Core extends Module
         ];
     }
 
-    public function requireDev()
-    {
-        return [
-            DebugBar::class,
-        ];
-    }
-
     public function define(Container $di)
     {
         /** DefaultResponder */
 
         $di->params[GenericResponder::class] = [
             'twig' => $di->lazyGet('twig:environment'),
-            'debugbar' => null,
         ];
-
-        if ($this->loader()->loaded(DebugBar::class)) {
-            $di->params[DefaultResponder::class]['debugbar'] = $di->lazyGet('debugbar');
-        }
 
         /** ExceptionHandler */
 

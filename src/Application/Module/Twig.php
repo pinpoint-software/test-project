@@ -3,7 +3,6 @@ namespace Application\Module;
 
 use Aura\Di\Container;
 use Cadre\Module\Module;
-use DebugBar\Bridge\Twig\TraceableTwigEnvironment;
 use Twig_Environment;
 use Twig_Extension_Debug;
 use Twig_Extensions_Extension_Date;
@@ -17,11 +16,7 @@ class Twig extends Module
     {
         /** Services */
 
-        if ($this->loader()->loaded(DebugBar::class)) {
-            $di->set('twig:environment', $di->lazyNew(TraceableTwigEnvironment::class));
-        } else {
-            $di->set('twig:environment', $di->lazyNew(Twig_Environment::class));
-        }
+        $di->set('twig:environment', $di->lazyNew(Twig_Environment::class));
 
         /** Twig */
 
