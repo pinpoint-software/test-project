@@ -102,11 +102,11 @@ We're using Paul's ADR framework
 which itself is built using other projects that Paul built like
 [Aura](http://auraphp.com/).
 
-I explain ADR and how Radar implements it in my blog post
+Andrew Shell explains ADR and how Radar implements it in his blog post
 [Radar Under the Hood](https://www.futureproofphp.com/2016/09/21/radar-under-the-hood/).
-My blog [FutureProof PHP](https://www.futureproofphp.com/) can also be considered
-further documentation of how I think about software development and in particular
-the libraries I've built and use in this application.
+His blog [FutureProof PHP](https://www.futureproofphp.com/) can also be considered
+further documentation of how we think about software development and in particular
+the libraries we use in this application.
 
 ### Other Significant Information
 
