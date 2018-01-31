@@ -40,13 +40,5 @@
             "email": "andrew@andrewshell.org"
         }
     ],
-    "scripts": {
-        "post-install-cmd" : [
-            "php scripts/assetcopy.php"
-        ],
-        "post-update-cmd" : [
-            "php scripts/assetcopy.php"
-        ]
-    },
     "minimum-stability": "stable"
 }

@@ -1,9 +1,4 @@
 .DS_Store
-.vagrant
 /build
 /config/phinx.php
-/node_modules
 /vendor
-/public/bower_components
-/public/css
-/public/debugbar
