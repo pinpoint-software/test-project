@@ -7,7 +7,7 @@ use Radar\Adr\Boot;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory as Request;
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 date_default_timezone_set('UTC');
 define('__ROOTDIR__', realpath(__DIR__ . '/../'));
