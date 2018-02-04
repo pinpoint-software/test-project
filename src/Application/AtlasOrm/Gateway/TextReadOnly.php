@@ -56,24 +56,10 @@ class TextReadOnly implements TextReadOnlyGateway
 
     public function getText($id)
     {
-        $textRecord = $this->atlas->fetchRecord(TextMapper::class, $id);
-
-        $text = new Text(
-            $textRecord->id,
-            $textRecord->title,
-            $textRecord->text,
-            new User(
-                $textRecord->submitter->id,
-                $textRecord->submitter->email,
-                $textRecord->submitter->password,
-                $textRecord->submitter->first_name,
-                $textRecord->submitter->last_name,
-                new DateTime($textRecord->submitter->created, new DateTimeZone('UTC')),
-                new DateTime($textRecord->submitter->updated, new DateTimeZone('UTC'))
-            ),
-            new DateTime($textRecord->created, new DateTimeZone('UTC')),
-            new DateTime($textRecord->updated, new DateTimeZone('UTC'))
-        );
+        $text = $this->atlas->select(TextMapper::class)
+                    ->where('id = ?', $id)
+                    ->cols(['id', 'title', 'text'])
+                    ->fetchRecord();
 
         return $text;
     }

@@ -32,6 +32,10 @@ class Routing extends Module
         $di->params[Service\LoginSubmit::class] = [
             'userGateway' => $di->lazyNew(UserReadOnly::class),
         ];
+
+        $di->params[Service\TextViewer::class] = [
+            'textGateway' => $di->lazyNew(TextReadOnly::class)
+        ];
     }
 
     public function modify(Container $di)
@@ -78,6 +82,7 @@ class Routing extends Module
             ->responder(Responder\GenericRedirect::class);
 
         $adr->get('TextView', '/text/{id}/', Service\TextViewer::class)
+            ->input(Input\TextView::class)
             ->defaults(['_view' => 'viewtext.html.twig']);
     }
 }

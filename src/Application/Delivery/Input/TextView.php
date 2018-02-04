@@ -2,12 +2,13 @@
 namespace Application\Delivery\Input;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr7Middlewares\Middleware\AuraSession;
 
-class TextViewer
+class TextView
 {
     public function __invoke(Request $request)
     {
-        return [];
+        $id = $request->getAttribute('id');
+
+        return ['id' => $id];
     }
 }

@@ -12,18 +12,16 @@ class TextViewer
         $this->textGateway = $textGateway;
     }
 
-    public function __invoke()
+    public function __invoke($id)
     {
-        $text = $this->textGateway->getText();
+        $text = $this->textGateway->getText($id);
 
-        $payload['success'] = 'true';
-        $payload['text'] = [
-          'id' => $text->id(),
-          'title' => $text->title(),
-          'text' => $text->text(),
-          'firstName' => $text->submitter()->firstName(),
-          'lastName' => $text->submitter()->lastName(),
-          'created' => $text->created(),
+        $payload = [
+            'success' => true,
+            'post' => [
+              'title' => $text->title,
+              'text' => $text->text
+            ]
         ];
 
         return $payload;
