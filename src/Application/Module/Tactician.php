@@ -3,7 +3,9 @@ namespace Application\Module;
 
 use Application\CommandBus\ContainerLocator;
 use Application\CommandBus\Listener\SubmitLink as SubmitLinkListener;
+use Application\CommandBus\Listener\SubmitText as SubmitTextListener;
 use Application\Domain\Event\SubmitLink as SubmitLinkEvent;
+use Application\Domain\Event\SubmitText as SubmitTextEvent;
 use Aura\Di\Container;
 use Cadre\Module\Module;
 use League\Tactician\CommandBus;
@@ -17,6 +19,7 @@ class Tactician extends Module
     public function define(Container $di)
     {
         $di->set(SubmitLinkListener::class, $di->lazyNew(SubmitLinkListener::class));
+        $di->set(SubmitTextListener::class, $di->lazyNew(SubmitTextListener::class));
 
         $di->params[CommandBus::class] = [
             'middleware' => $di->lazyArray([
@@ -35,6 +38,7 @@ class Tactician extends Module
             'container' => $di,
             'commandNameToHandlerMap' => [
                 SubmitLinkEvent::class => SubmitLinkListener::class,
+                SubmitTextEvent::class => SubmitTextListener::class
             ],
         ];
     }

@@ -2,8 +2,10 @@
 namespace Application\Module;
 
 use Application\AtlasOrm\Gateway\LinkReadOnly;
+use Application\AtlasOrm\Gateway\TextReadOnly;
 use Application\AtlasOrm\Gateway\UserReadOnly;
 use Application\CommandBus\Gateway\LinkEvent;
+use Application\CommandBus\Gateway\TextEvent;
 use Aura\Di\Container;
 use Cadre\Module\Module;
 use Application\Delivery\Input;
@@ -14,12 +16,17 @@ class Routing extends Module
 {
     public function define(Container $di)
     {
-        $di->params[Service\LinkList::class] = [
+        $di->params[Service\SubmissionList::class] = [
             'linkGateway' => $di->lazyNew(LinkReadOnly::class),
+            'textGateway' => $di->lazyNew(TextReadOnly::class)
         ];
 
         $di->params[Service\LinkSubmit::class] = [
             'linkGateway' => $di->lazyNew(LinkEvent::class),
+        ];
+
+        $di->params[Service\TextSubmit::class] = [
+          'textGateway' => $di->lazyNew(TextEvent::class)
         ];
 
         $di->params[Service\LoginSubmit::class] = [
@@ -31,8 +38,17 @@ class Routing extends Module
     {
         $adr = $di->get('radar/adr:adr');
 
-        $adr->get('ListLinks', '/', Service\LinkList::class)
+        $adr->get('ListPosts', '/', Service\SubmissionList::class)
             ->defaults(['_view' => 'list.html.twig']);
+
+        $adr->get('ListSpecific', '/list/', Service\SubmissionList::class)
+            ->defaults(['_view' => 'list.html.twig']);
+
+        $adr->get('ListTexts', '/list/texts/', Service\SubmissionList::class)
+            ->defaults(['_view' => 'listtext.html.twig']);
+
+        $adr->get('ListLinks', '/list/links/', Service\SubmissionList::class)
+            ->defaults(['_view' => 'listlink.html.twig']);
 
         $adr->get('LoginForm', '/login/', Service\LoginForm::class)
             ->input(Input\LoginForm::class)
@@ -45,12 +61,23 @@ class Routing extends Module
         $adr->get('Logout', '/logout/', Service\Generic::class)
             ->responder(Responder\Logout::class);
 
-        $adr->get('LinkForm', '/submit/', Service\LinkForm::class)
-            ->input(Input\LinkForm::class)
+        $adr->get('SubmissionFormLink', '/submit/link/', Service\SubmissionForm::class)
+            ->input(Input\SubmissionForm::class)
             ->defaults(['_view' => 'link.html.twig']);
 
-        $adr->post('LinkSubmit', '/submit/', Service\LinkSubmit::class)
+        $adr->get('SubmissionFormText', '/submit/text/', Service\SubmissionForm::class)
+            ->input(Input\SubmissionForm::class)
+            ->defaults(['_view' => 'text.html.twig']);
+
+        $adr->post('LinkSubmit', '/submit/link/', Service\LinkSubmit::class)
             ->input(Input\LinkSubmit::class)
             ->responder(Responder\GenericRedirect::class);
+
+        $adr->post('TextSubmit', '/submit/text/', Service\TextSubmit::class)
+            ->input(Input\TextSubmit::class)
+            ->responder(Responder\GenericRedirect::class);
+
+        $adr->get('TextView', '/text/{id}/', Service\TextViewer::class)
+            ->defaults(['_view' => 'viewtext.html.twig']);
     }
 }

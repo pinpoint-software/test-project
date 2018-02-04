@@ -1,7 +1,7 @@
 <?php
 namespace Application\Service;
 
-class LinkForm
+class SubmissionForm
 {
     public function __invoke($warning = false)
     {

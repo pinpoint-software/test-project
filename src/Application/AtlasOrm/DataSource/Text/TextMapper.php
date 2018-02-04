@@ -1,6 +1,7 @@
 <?php
-namespace Application\DataSource\Text;
+namespace Application\AtlasOrm\DataSource\Text;
 
+use Application\AtlasOrm\DataSource\User\UserMapper;
 use Atlas\Orm\Mapper\AbstractMapper;
 
 /**
@@ -13,6 +14,9 @@ class TextMapper extends AbstractMapper
      */
     protected function setRelated()
     {
-        // no related fields
+      $this->manyToOne('submitter', UserMapper::CLASS)
+          ->on([
+              'submitter_id' => 'id',
+          ]);
     }
 }

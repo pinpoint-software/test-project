@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ title | default('Links') }}</title>
+    <title>{{ title | default('Posts') }}</title>
 
     <link rel="stylesheet" href="/public/css/style.css">
 
@@ -24,13 +24,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Links</a>
+                <a class="navbar-brand" href="/">Posts</a>
             </div>
 
             <div class="collapse navbar-collapse" id="main-navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
                 {% if user and user.id %}
-                    <li><a href="/submit/">Submit</a></li>
+                    <li><a href="/submit/link">Submit Link</a></li>
+                    <li><a href="/submit/text">Submit Text</a></li>
                 {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

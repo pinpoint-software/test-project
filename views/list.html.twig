@@ -1,11 +1,23 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
+<div id="list-by-options" style="margin-bottom: 12px;">
+List Submissions By:&nbsp;&nbsp;&nbsp;&nbsp;
+  All (current)&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="/list/links">Just Links</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="/list/texts">Just Texts</a>
+</div>
 <div class="list-group">
-{% for link in links %}
-    <a href="{{ link.url }}" class="list-group-item">
-        <strong class="list-group-item-heading">{{ link.title }}</strong><br>
-        <small class="list-group-item-text">Submitted {{ link.created | time_diff | default('now') }} by {{ link.firstName }} {{ link.lastName }}</small>
+{% for post in posts %}
+  {% if post.url is defined %}
+    <a href="{{ post.url }}" class="list-group-item">
+    <strong class="list-group-item-heading">{{ post.title }}</strong><br>
+    <small class="list-group-item-text">Submitted to Links {{ post.created | time_diff | default('now') }} by {{ post.firstName }} {{ post.lastName }}</small>
+  {% elseif post.text is defined %}
+    <a href="/text/{{ post.id }}" class="list-group-item">
+    <strong class="list-group-item-heading">{{ post.title }}</strong><br>
+    <small class="list-group-item-text">Submitted to Texts {{ post.created | time_diff | default('now') }} by {{ post.firstName }} {{ post.lastName }}</small>
+  {% endif %}
     </a>
 {% endfor %}
 </div>
