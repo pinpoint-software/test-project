@@ -48,7 +48,12 @@ class SubmissionList
           ];
         }
 
-        $payload['posts'] = array_merge($payload['links'], $payload['texts']);
+        $merged = array_merge($payload['links'], $payload['texts']);
+        usort($merged, function($d1, $d2) {
+          return ($d1['created']->getTimestamp() > $d2['created']->getTimestamp()) ? -1 : 1;
+        });
+
+        $payload['posts'] = $merged;
 
         return $payload;
     }
