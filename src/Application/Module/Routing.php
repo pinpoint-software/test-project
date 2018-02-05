@@ -18,6 +18,10 @@ class Routing extends Module
             'linkGateway' => $di->lazyNew(LinkReadOnly::class),
         ];
 
+        $di->params[Service\UserText::class] = [
+            'linkGateway' => $di->lazyNew(LinkReadOnly::class),
+        ];
+
         $di->params[Service\LinkSubmit::class] = [
             'linkGateway' => $di->lazyNew(LinkEvent::class),
         ];
@@ -30,6 +34,9 @@ class Routing extends Module
     public function modify(Container $di)
     {
         $adr = $di->get('radar/adr:adr');
+
+        $adr->get('TextLink', '/text/.*/', Service\UserText::class)
+            ->defaults(['_view' => 'userText.html.twig']);
 
         $adr->get('ListLinks', '/', Service\LinkList::class)
             ->defaults(['_view' => 'list.html.twig']);

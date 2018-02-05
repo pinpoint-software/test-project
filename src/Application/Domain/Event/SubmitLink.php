@@ -7,13 +7,15 @@ class SubmitLink
     private $url;
     private $submitterId;
     private $created;
+    private $userText;
 
-    public function __construct($title, $url, $submitterId, $created)
+    public function __construct($title, $url, $submitterId, $created, $userText)
     {
         $this->title = $title;
         $this->url = $url;
         $this->submitterId = $submitterId;
         $this->created = $created;
+        $this->userText = $userText;
     }
 
     public function title()
@@ -34,5 +36,9 @@ class SubmitLink
     public function created()
     {
         return $this->created;
+    }
+    public function userText()
+    {
+        return $this->userText;
     }
 }

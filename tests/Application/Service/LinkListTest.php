@@ -10,7 +10,7 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $user = User::createUser('user@example.com', 'password', 'Test', 'User');
-        $link = Link::createLink('Example', 'http://example.com/', $user);
+        $link = Link::createLink('Example', 'http://example.com/', $user, 'Test Text');
 
         $linkGateway = $this->createMock(LinkReadOnly::class);
         $linkGateway->method('getRecentLinks')->willReturn([$link]);
@@ -26,5 +26,6 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test', $payload['links'][0]['firstName']);
         $this->assertEquals('User', $payload['links'][0]['lastName']);
         $this->assertInstanceOf('DateTime', $payload['links'][0]['created']);
+        $this->assertInstanceOf('Test Text', $payload['links'][0]['userText']);
     }
 }

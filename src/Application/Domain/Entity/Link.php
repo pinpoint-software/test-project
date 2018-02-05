@@ -12,6 +12,7 @@ class Link
     private $submitter;
     private $created;
     private $updated;
+    private $userText;
 
     public function __construct(
         $id,
@@ -19,7 +20,8 @@ class Link
         $url,
         User $submitter,
         DateTime $created,
-        DateTime $updated
+        DateTime $updated,
+        $userText
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -27,12 +29,13 @@ class Link
         $this->submitter = $submitter;
         $this->created = $created;
         $this->updated = $updated;
+        $this->userText = $userText;
     }
 
-    public static function createLink($title, $url, User $submitter)
+    public static function createLink($title, $url, User $submitter, $userText)
     {
         $updated = $created = new DateTime('now', new DateTimeZone('UTC'));
-        return new static(null, $title, $url, $submitter, $created, $updated);
+        return new static(null, $title, $url, $submitter, $created, $updated, $userText);
     }
 
     public function id()
@@ -58,5 +61,9 @@ class Link
     public function created()
     {
         return $this->created;
+    }
+    public function userText()
+    {
+        return $this->userText;
     }
 }

@@ -12,23 +12,28 @@ class LinkSubmit
         $this->linkGateway = $linkGateway;
     }
 
-    public function __invoke($title, $url, $submitterId)
+    public function __invoke($title, $url, $submitterId, $userText)
     {
         if (empty($submitterId)) {
             $payload = [
                 'success' => false,
                 'warning' => 'Must be logged in to submit links',
             ];
-        } elseif (empty($title) || empty($url)) {
+        } elseif (empty($title)) {
             $payload = [
                 'success' => false,
-                'warning' => 'Title and URL are required',
+                'warning' => 'A Title is required',
+            ];
+        } elseif (empty($url) && empty($userText)) {
+            $payload = [
+                'success' => false,
+                'warning' => 'Either a URL or a User Description must be provided',
             ];
         } else {
             $payload = [
                 'success' => true,
             ];
-            $this->linkGateway->submit($title, $url, $submitterId);
+            $this->linkGateway->submit($title, $url, $submitterId, $userText);
         }
 
         return $payload;

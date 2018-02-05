@@ -28,6 +28,7 @@ class LinkList
                 'firstName' => $link->submitter()->firstName(),
                 'lastName' => $link->submitter()->lastName(),
                 'created' => $link->created(),
+                'userText' => $link->userText(),
             ];
         }
 

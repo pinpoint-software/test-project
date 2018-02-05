@@ -31,6 +31,7 @@ class LinkTable extends AbstractTable
             'submitter_id',
             'created',
             'updated',
+            'userText',
         ];
     }
 
@@ -100,6 +101,16 @@ class LinkTable extends AbstractTable
                 'autoinc' => false,
                 'primary' => false,
             ],
+            'userText' => (object) [
+                'name' => 'userText',
+                'type' => 'text',
+                'size' => null,
+                'scale' => null,
+                'notnull' => true,
+                'default' => null,
+                'autoinc' => false,
+                'primary' => false,
+            ],
         ];
     }
 
@@ -133,6 +144,7 @@ class LinkTable extends AbstractTable
             'submitter_id' => null,
             'created' => null,
             'updated' => null,
+            'userText' => null,
         ];
     }
 }

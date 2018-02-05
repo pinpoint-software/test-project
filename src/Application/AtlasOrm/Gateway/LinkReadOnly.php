@@ -47,10 +47,19 @@ class LinkReadOnly implements LinkReadOnlyGateway
                     new DateTime($linkRecord->submitter->updated, new DateTimeZone('UTC'))
                 ),
                 new DateTime($linkRecord->created, new DateTimeZone('UTC')),
-                new DateTime($linkRecord->updated, new DateTimeZone('UTC'))
+                new DateTime($linkRecord->updated, new DateTimeZone('UTC')),
+                $linkRecord->userText
             );
         }
 
         return $links;
+    }
+
+    public function getLinkByTitle($title)
+    {
+        return $this->atlas
+            ->select(LinkMapper::class)
+            ->where('title = ?', $title)
+            ->fetchRecord();
     }
 }

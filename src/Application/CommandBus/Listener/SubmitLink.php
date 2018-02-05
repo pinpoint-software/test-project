@@ -21,7 +21,8 @@ class SubmitLink
             $event->title(),
             $event->url(),
             $event->submitterId(),
-            new DateTime($event->created(), new DateTimeZone('UTC'))
+            new DateTime($event->created(), new DateTimeZone('UTC')),
+            $event->userText()
         );
     }
 }
