@@ -35,7 +35,7 @@ class Routing extends Module
     {
         $adr = $di->get('radar/adr:adr');
 
-        $adr->get('TextLink', '/text/.*/', Service\UserText::class)
+        $adr->get('TextLink', '/text/', Service\UserText::class)
             ->defaults(['_view' => 'userText.html.twig']);
 
         $adr->get('ListLinks', '/', Service\LinkList::class)

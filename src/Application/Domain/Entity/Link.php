@@ -25,7 +25,11 @@ class Link
     ) {
         $this->id = $id;
         $this->title = $title;
-        $this->url = $url;
+        if (!empty($userText)) {
+            $this->url = "text/?id=$id";
+        } else {
+            $this->url = $url;
+        }
         $this->submitter = $submitter;
         $this->created = $created;
         $this->updated = $updated;

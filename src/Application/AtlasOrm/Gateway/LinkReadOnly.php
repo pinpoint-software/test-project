@@ -55,11 +55,11 @@ class LinkReadOnly implements LinkReadOnlyGateway
         return $links;
     }
 
-    public function getLinkByTitle($title)
+    public function getLinkById($id)
     {
         return $this->atlas
             ->select(LinkMapper::class)
-            ->where('title = ?', $title)
+            ->where('id = ?', $id)
             ->fetchRecord();
     }
 }

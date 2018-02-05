@@ -10,9 +10,6 @@ class LinkSubmit
         $post = $request->getParsedBody();
         $user = $request->getAttribute('user', false);
         $submitterId = (false === $user ? false : $user['id']);
-        if (!empty($post['userText'])){
-            $post['url'] = 'text/' . urlencode($post['title']);
-        }
         return [$post['title'], $post['url'], $submitterId, $post['userText']];
     }
 }

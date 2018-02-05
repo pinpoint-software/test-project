@@ -15,14 +15,24 @@ class UserText
 
     public function __invoke()
     {
-        $title = urldecode(rtrim(substr($_SERVER['REQUEST_URI'], 6), '/'));
-        $record = $this->linkGateway->getLinkByTitle($title);
+        parse_str($_SERVER['QUERY_STRING'], $query);
+        $id = $query['id'];
+        if ($id) {
+            $record = $this->linkGateway->getLinkById($id);
+        } else {
+            $payload = [
+                'success' => false,
+                'warning' => "Invlaid query string.",
+            ];
+            return $payload;
+        }
+
         $userText = $record->userText;
         if($userText) {
             $payload = [
                 'success' => true,
                 'text' => $userText,
-                'title' => $title,
+                'title' => $record->title,
             ];
         } else {
             $payload = [
