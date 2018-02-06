@@ -12,7 +12,7 @@ class LinkSubmit
         $this->linkGateway = $linkGateway;
     }
 
-    public function __invoke($title, $url, $submitterId, $userText)
+    public function __invoke($title, $url, $submitterId, $userText, $dblLink)
     {
         if (empty($submitterId)) {
             $payload = [
@@ -27,13 +27,13 @@ class LinkSubmit
         } elseif (empty($url) && empty($userText)) {
             $payload = [
                 'success' => false,
-                'warning' => 'Either a URL or a User Description must be provided',
+                'warning' => 'Either a URL or a text description to be linked must be provided',
             ];
         } else {
             $payload = [
                 'success' => true,
             ];
-            $this->linkGateway->submit($title, $url, $submitterId, $userText);
+            $this->linkGateway->submit($title, $url, $submitterId, $userText, $dblLink);
         }
 
         return $payload;

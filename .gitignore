@@ -2,3 +2,5 @@
 /build
 /config/phinx.php
 /vendor
+*.swp
+*.patch
