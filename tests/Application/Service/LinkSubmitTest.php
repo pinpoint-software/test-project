@@ -18,7 +18,7 @@ class LinkSubmitTest extends \PHPUnit_Framework_TestCase
             );
 
         $service = new LinkSubmit($linkGateway);
-        $payload = ($service)('Example', 'http://example.com/', '123');
+        $payload = ($service)('Example', 'http://example.com/', '123', 'some user text', 'on');
 
         $this->assertTrue($payload['success']);
     }

@@ -3,6 +3,13 @@ namespace Application\Service;
 
 use Application\Domain\Gateway\LinkReadOnly;
 
+/*
+ * class UserText
+ *
+ * A service class that sends data to the userText.html.twig template.
+ *
+ *
+ */
 class UserText
 {
 

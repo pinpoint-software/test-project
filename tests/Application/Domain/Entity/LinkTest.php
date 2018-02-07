@@ -24,7 +24,8 @@ class LinkTest extends \PHPUnit_Framework_TestCase
             'http://example.com/',
             $submitter,
             new DateTime('2016-12-19 10:24:13', new DateTimeZone('UTC')),
-            new DateTime('2016-12-20 20:51:04', new DateTimeZone('UTC'))
+            new DateTime('2016-12-20 20:51:04', new DateTimeZone('UTC')),
+            'some user text'
         );
 
         $this->assertEquals('123', $link->id());
@@ -32,6 +33,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/', $link->url());
         $this->assertEquals($submitter, $link->submitter());
         $this->assertEquals('2016-12-19 10:24:13', $link->created()->format('Y-m-d H:i:s'));
+        $this->assertEquals('some user text', $link->userText());
     }
 
     public function testCreateLinkFactory()
@@ -49,12 +51,15 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $link = Link::createLink(
             'Title',
             'http://example.com/',
-            $submitter
+            $submitter,
+            'some user text'
+
         );
 
         $this->assertNull($link->id());
         $this->assertEquals('Title', $link->title());
         $this->assertEquals('http://example.com/', $link->url());
         $this->assertEquals($submitter, $link->submitter());
+        $this->assertEquals('some user text', $link->userText());
     }
 }

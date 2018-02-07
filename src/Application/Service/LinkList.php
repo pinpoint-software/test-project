@@ -29,6 +29,7 @@ class LinkList
                 'lastName' => $link->submitter()->lastName(),
                 'created' => $link->created(),
                 'userText' => $link->userText(),
+                'location' => $link->externalLink() ? "External" : "Internal"
             ];
         }
 

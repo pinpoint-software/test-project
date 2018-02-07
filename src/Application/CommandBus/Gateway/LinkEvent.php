@@ -19,7 +19,8 @@ class LinkEvent implements LinkEventInterface
     public function submit($title, $url, $submitterId, $userText, $dblLink)
     {
         $created = new DateTime('now', new DateTimeZone('UTC'));
-        // if the user proivded a url and wants a second link created
+        // if the user proivded both a url and some text and wants both links
+        // created, create the URL link first
         if($dblLink) {
             $this->commandBus->handle(new SubmitLink(
                 $title,

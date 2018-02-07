@@ -55,6 +55,14 @@ class LinkReadOnly implements LinkReadOnlyGateway
         return $links;
     }
 
+    /*
+     * getLinkById($id)
+     *
+     *      Returns the database record for the given database id.
+     *
+     * @returns: An associative array of the requested record, null if none was
+     *           found.
+     */
     public function getLinkById($id)
     {
         return $this->atlas

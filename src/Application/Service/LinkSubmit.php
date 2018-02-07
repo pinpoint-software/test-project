@@ -12,7 +12,7 @@ class LinkSubmit
         $this->linkGateway = $linkGateway;
     }
 
-    public function __invoke($title, $url, $submitterId, $userText, $dblLink)
+    public function __invoke($title, $url, $submitterId, $userText, $dblLink = "")
     {
         if (empty($submitterId)) {
             $payload = [
