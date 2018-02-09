@@ -10,10 +10,31 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $user = User::createUser('user@example.com', 'password', 'Test', 'User');
-        $link = Link::createLink('Example', 'http://example.com/', $user, 'Test Text');
+        $linkWithText = Link::createLink('Example', 'http://example.com/', $user, 'Test Text');
 
         $linkGateway = $this->createMock(LinkReadOnly::class);
-        $linkGateway->method('getRecentLinks')->willReturn([$link]);
+        $linkGateway->method('getRecentLinks')->willReturn([$linkWithText]);
+
+        $service = new LinkList($linkGateway);
+        $payload = ($service)();
+
+        $this->assertTrue($payload['success']);
+        $this->assertInternalType('array', $payload['links']);
+        $this->assertArrayHasKey(0, $payload['links']);
+        $this->assertEquals('Example', $payload['links'][0]['title']);
+        $this->assertRegExp('/text\/\?id=\d*/', $payload['links'][0]['url']);
+        $this->assertEquals('Test', $payload['links'][0]['firstName']);
+        $this->assertEquals('User', $payload['links'][0]['lastName']);
+        $this->assertInstanceOf('DateTime', $payload['links'][0]['created']);
+        $this->assertEquals('Test Text', $payload['links'][0]['userText']);
+
+
+
+
+        $linkWithOutText = Link::createLink('Example', 'http://example.com/', $user, '');
+
+        $linkGateway = $this->createMock(LinkReadOnly::class);
+        $linkGateway->method('getRecentLinks')->willReturn([$linkWithOutText]);
 
         $service = new LinkList($linkGateway);
         $payload = ($service)();
@@ -26,6 +47,6 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test', $payload['links'][0]['firstName']);
         $this->assertEquals('User', $payload['links'][0]['lastName']);
         $this->assertInstanceOf('DateTime', $payload['links'][0]['created']);
-        $this->assertInstanceOf('Test Text', $payload['links'][0]['userText']);
+        $this->assertEquals('', $payload['links'][0]['userText']);
     }
 }

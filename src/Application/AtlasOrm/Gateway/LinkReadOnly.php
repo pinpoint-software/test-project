@@ -13,6 +13,39 @@ class LinkReadOnly implements LinkReadOnlyGateway
 {
     private $atlas;
 
+    /*
+     * createLinkInkstance($linkRecord)
+     *
+     *      Takes in an AtlasORM Record object for the links table and returns
+     *      a corresponding new Link intances with the given data.
+     *
+     * @param Atlas\Orn\Mapper\Record $linkRecord - Should be instantiated with
+     *                                      the correct data.
+     * @return An instance of Application\Domain\Entiy\Link
+     *
+     */
+    private function createLinkInstance($linkRecord) {
+        return new Link(
+            $linkRecord->id,
+            $linkRecord->title,
+            $linkRecord->url,
+            new User(
+                $linkRecord->submitter->id,
+                $linkRecord->submitter->email,
+                $linkRecord->submitter->password,
+                $linkRecord->submitter->first_name,
+                $linkRecord->submitter->last_name,
+                new DateTime($linkRecord->submitter->created, new DateTimeZone('UTC')),
+                new DateTime($linkRecord->submitter->updated, new DateTimeZone('UTC'))
+            ),
+            new DateTime($linkRecord->created, new DateTimeZone('UTC')),
+            new DateTime($linkRecord->updated, new DateTimeZone('UTC')),
+            $linkRecord->userText
+
+
+        );
+    }
+
     public function __construct(Atlas $atlas)
     {
         $this->atlas = $atlas;
@@ -33,23 +66,7 @@ class LinkReadOnly implements LinkReadOnlyGateway
             ->fetchRecordSet();
 
         foreach ($linkRecordSet as $linkRecord) {
-            $links[] = new Link(
-                $linkRecord->id,
-                $linkRecord->title,
-                $linkRecord->url,
-                new User(
-                    $linkRecord->submitter->id,
-                    $linkRecord->submitter->email,
-                    $linkRecord->submitter->password,
-                    $linkRecord->submitter->first_name,
-                    $linkRecord->submitter->last_name,
-                    new DateTime($linkRecord->submitter->created, new DateTimeZone('UTC')),
-                    new DateTime($linkRecord->submitter->updated, new DateTimeZone('UTC'))
-                ),
-                new DateTime($linkRecord->created, new DateTimeZone('UTC')),
-                new DateTime($linkRecord->updated, new DateTimeZone('UTC')),
-                $linkRecord->userText
-            );
+            $links[] = self::createLinkInstance($linkRecord);
         }
 
         return $links;
@@ -60,14 +77,20 @@ class LinkReadOnly implements LinkReadOnlyGateway
      *
      *      Returns the database record for the given database id.
      *
-     * @returns: An associative array of the requested record, null if none was
-     *           found.
+     * @return An instance of the Application\Domain\Entity\Link class
+     *          instantiated with the data from the queried record.
+     *          Returns null if the record was not found.
      */
     public function getLinkById($id)
     {
-        return $this->atlas
-            ->select(LinkMapper::class)
-            ->where('id = ?', $id)
-            ->fetchRecord();
+        $linkRecord = $this->atlas->select(LinkMapper::class)
+                ->where('id = ?', $id)->fetchRecord();
+        if ($linkRecord) {
+            return self::createLinkInstance($linkRecord);
+        } else {
+            return null;
+        }
+
     }
+
 }

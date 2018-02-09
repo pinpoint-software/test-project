@@ -1,24 +1,24 @@
 /* Register event handlers */
 $(document).ready(function() {
-    $('#url').keyup(inputHandler);
-    $('#userText').keyup(inputHandler);
+    $('#url').on('input', inputHandler);
+    $('#userText').on('input', inputHandler);
     $('#link-submit-btn').mouseover(linkBtnHandler);
 });
 
 var userWarnUrl = "Sorry to bother you like this, but we thought that you might "
-                + "like to know that, since there is already text entered into the "
-                + "'Text' field below, anything you enter here will be ignored. "
-                + "Unless, of course, you click on the 'Create Both Links' "
-                + "button below.";
-var userWarnText = "We can't help but notice that you have already typed something "
-                + "into the URL field above. That field will be ignored unless you "
-                + "click the 'Create Both Links' button below.";
+                + "like to know that, since there is already text entered into "
+                + "the 'Text' field below, anything you enter here will be "
+                + "ignored. Unless, of course, you click on the 'Create Both' "
+                + "Links 'button below.";
+var userWarnText = "We can't help but notice that you have already typed "
+                + "something into the URL field above. That field will be ignored "
+                + "unless you click the 'Create Both Links' button below.";
 /*
  *  inputHandler()
  *
- *      Called on keyup for both the 'url' input and the 'userText' input. If
- *      the user has not yet been warned (and there is text in both the url
- *      and userText fields), it will display a message relevent to whichever
+ *      Called on the 'input' event for both the 'url' input and the 'userText'
+ *      input. If the user has not yet been warned (and there is text in both the
+ *      url and userText fields), it will display a message relevent to whichever
  *      field that the user is currently entering text into.
  *
  *      It will also fade in or out the 'Create Both Links' button based on if
@@ -34,7 +34,7 @@ function inputHandler(ev) {
     // ensure that the user isn't repeatedly warned about the consequences of
     // not clicking the button
     if (typeof inputHandler.haveWarned == 'undefined') {
-        inputHandler.haveWarned= false;
+        inputHandler.haveWarned = false;
     }
 
     if (textAndUrlValsNotNull() && (target === 'url')
@@ -48,9 +48,9 @@ function inputHandler(ev) {
     }
 
     if(inputHandler.haveWarned && textAndUrlValsNotNull()) {
-        fadeElement('dual-create-btn-div', 2000, 'in');
+        fadeElement('dbl-link-btn-div', 2000, 'in');
     } else {
-        fadeElement('dual-create-btn-div', 2000, 'out');
+        fadeElement('dbl-link-btn-div', 2000, 'out');
     }
 }
 /*
@@ -63,7 +63,7 @@ function inputHandler(ev) {
  */
 function linkBtnHandler(ev) {
 
-    // validate the url if there is one 
+    // validate the url if there is one
     var url = $('#url').val();
     var badUrlMsg = "The URL:       " + url + "\nappears to be invalid.\n\n"
                     + "The url must be formatted as such:"

@@ -6,7 +6,7 @@ use Application\Domain\Gateway\LinkReadOnly;
 /*
  * class UserText
  *
- * A service class that sends data to the userText.html.twig template.
+ * A service class served in respone to the '/text/?id=\d*' route.
  *
  *
  */
@@ -22,6 +22,7 @@ class UserText
 
     public function __invoke()
     {
+        $userText = "";
         parse_str($_SERVER['QUERY_STRING'], $query);
         $id = $query['id'];
         if ($id) {
@@ -34,17 +35,25 @@ class UserText
             return $payload;
         }
 
-        $userText = $record->userText;
-        if($userText) {
-            $payload = [
-                'success' => true,
-                'text' => $userText,
-                'title' => $record->title,
-            ];
+        if ($record) {
+            $userText = $record->userText();
         } else {
             $payload = [
                 'success' => false,
                 'warning' => "Could not find requested link record.",
+            ];
+        }
+
+        if($userText) {
+            $payload = [
+                'success' => true,
+                'text' => $userText,
+                'title' => $record->title(),
+            ];
+        } else {
+            $payload = [
+                'success' => false,
+                'warning' => "Could not find requested link record field.",
             ];
 
         }
