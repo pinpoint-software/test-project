@@ -1,4 +1,6 @@
 .DS_Store
+.vagrant
+Vagrantfile
 /build
 /config/phinx.php
 /vendor
