@@ -21,7 +21,8 @@ class LinkSeeder extends AbstractSeed
         $data = array(
           array(
               'title' => 'Pinpoint Software',
-              'url' => 'http://www.pinpointsoftware.co/',
+              'url' => '',
+			  'text' => 'A rolling stone...',
               'submitter_id' => 1,
               'created' => date('Y-m-d H:i:s'),
               'updated' => date('Y-m-d H:i:s'),
@@ -29,13 +30,15 @@ class LinkSeeder extends AbstractSeed
           array(
               'title' => 'Date Check Pro',
               'url' => 'http://www.datecheckpro.com/',
+			  'text' => '',
               'submitter_id' => 1,
               'created' => date('Y-m-d H:i:s', strtotime('-1 minute')),
               'updated' => date('Y-m-d H:i:s', strtotime('-1 minute')),
           ),
           array(
               'title' => 'Taskle',
-              'url' => 'http://www.taskle.com/',
+              'url' => '',
+			  'text' => 'A bird in the bush...',
               'submitter_id' => 1,
               'created' => date('Y-m-d H:i:s', strtotime('-3 minutes')),
               'updated' => date('Y-m-d H:i:s', strtotime('-3 minutes')),
@@ -43,6 +46,7 @@ class LinkSeeder extends AbstractSeed
           array(
               'title' => 'Stop Waste Together',
               'url' => 'http://www.stopwastetogether.com/',
+			  'text' => '',
               'submitter_id' => 1,
               'created' => date('Y-m-d H:i:s', strtotime('-10 minutes')),
               'updated' => date('Y-m-d H:i:s', strtotime('-10 minutes')),

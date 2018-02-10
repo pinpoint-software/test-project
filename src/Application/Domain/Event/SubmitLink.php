@@ -8,10 +8,11 @@ class SubmitLink
     private $submitterId;
     private $created;
 
-    public function __construct($title, $url, $submitterId, $created)
+    public function __construct($title, $url, $text, $submitterId, $created)
     {
         $this->title = $title;
         $this->url = $url;
+        $this->text = $text;
         $this->submitterId = $submitterId;
         $this->created = $created;
     }
@@ -24,6 +25,11 @@ class SubmitLink
     public function url()
     {
         return $this->url;
+    }
+
+    public function text()
+    {
+        return $this->text;
     }
 
     public function submitterId()

@@ -37,6 +37,7 @@ class LinkReadOnly implements LinkReadOnlyGateway
                 $linkRecord->id,
                 $linkRecord->title,
                 $linkRecord->url,
+                $linkRecord->text,
                 new User(
                     $linkRecord->submitter->id,
                     $linkRecord->submitter->email,
