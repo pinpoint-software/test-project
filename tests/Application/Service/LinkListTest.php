@@ -26,7 +26,6 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test', $payload['links'][0]['firstName']);
         $this->assertEquals('User', $payload['links'][0]['lastName']);
         $this->assertInstanceOf('DateTime', $payload['links'][0]['created']);
-        $this->assertEquals('Test Text', $payload['links'][0]['userText']);
 
 
 
@@ -47,6 +46,5 @@ class LinkListTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Test', $payload['links'][0]['firstName']);
         $this->assertEquals('User', $payload['links'][0]['lastName']);
         $this->assertInstanceOf('DateTime', $payload['links'][0]['created']);
-        $this->assertEquals('', $payload['links'][0]['userText']);
     }
 }

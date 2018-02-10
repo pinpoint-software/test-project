@@ -27,7 +27,7 @@ class LinkWrite implements LinkWriteGateway
         $linkRecord->submitter_id = $submitterId;
         $linkRecord->created = $created->format('Y-m-d H:i:s');
         $linkRecord->updated = $created->format('Y-m-d H:i:s');
-        $linkRecord->userText = $userText;
+        $linkRecord->user_text = $userText;
 
         $success = $this->atlas->insert($linkRecord);
 

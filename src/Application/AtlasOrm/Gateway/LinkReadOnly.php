@@ -40,7 +40,7 @@ class LinkReadOnly implements LinkReadOnlyGateway
             ),
             new DateTime($linkRecord->created, new DateTimeZone('UTC')),
             new DateTime($linkRecord->updated, new DateTimeZone('UTC')),
-            $linkRecord->userText
+            $linkRecord->user_text
 
 
         );

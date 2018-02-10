@@ -1,7 +1,7 @@
 /* Register event handlers */
 $(document).ready(function() {
     $('#url').on('input', inputHandler);
-    $('#userText').on('input', inputHandler);
+    $('#user-text').on('input', inputHandler);
     $('#link-submit-btn').mouseover(linkBtnHandler);
 });
 
@@ -16,14 +16,14 @@ var userWarnText = "We can't help but notice that you have already typed "
 /*
  *  inputHandler()
  *
- *      Called on the 'input' event for both the 'url' input and the 'userText'
+ *      Called on the 'input' event for both the 'url' input and the 'user-text'
  *      input. If the user has not yet been warned (and there is text in both the
- *      url and userText fields), it will display a message relevent to whichever
+ *      url and user-text fields), it will display a message relevent to whichever
  *      field that the user is currently entering text into.
  *
  *      It will also fade in or out the 'Create Both Links' button based on if
  *      the user has been warned and whether or not there is still text in both
- *      the 'url' and 'userText' fields
+ *      the 'url' and 'user-text' fields
  *
  *  @returns: None
  */
@@ -41,7 +41,7 @@ function inputHandler(ev) {
             && !inputHandler.haveWarned) {
         alert(userWarnUrl);
         inputHandler.haveWarned = true;
-    } else if (textAndUrlValsNotNull() && (target === 'userText')
+    } else if (textAndUrlValsNotNull() && (target === 'user-text')
             && !inputHandler.haveWarned) {
         alert(userWarnText);
         inputHandler.haveWarned = true;
@@ -145,7 +145,7 @@ function validateUrl(url) {
  * @returns: boolean
  */
 function textAndUrlValsNotNull() {
-    return $('#url').val() && $('#userText').val();
+    return $('#url').val() && $('#user-text').val();
 }
 
 /*

@@ -20,18 +20,26 @@ class LinkSeeder extends AbstractSeed
 
         $data = array(
           array(
-              'title' => 'Pinpoint Software',
-              'url' => 'http://www.pinpointsoftware.co/',
+              'title' => 'User Text Test Seed',
+              'url' => '',
               'submitter_id' => 1,
               'created' => date('Y-m-d H:i:s'),
               'updated' => date('Y-m-d H:i:s'),
+              'user_text' => "Here is a string of test text"
+          ),
+          array(
+              'title' => 'Pinpoint Software',
+              'url' => 'http://www.pinpointsoftware.co/',
+              'submitter_id' => 1,
+              'created' => date('Y-m-d H:i:s', strtotime('-1 minute')),
+              'updated' => date('Y-m-d H:i:s', strtotime('-1 minute')),
           ),
           array(
               'title' => 'Date Check Pro',
               'url' => 'http://www.datecheckpro.com/',
               'submitter_id' => 1,
-              'created' => date('Y-m-d H:i:s', strtotime('-1 minute')),
-              'updated' => date('Y-m-d H:i:s', strtotime('-1 minute')),
+              'created' => date('Y-m-d H:i:s', strtotime('-2 minute')),
+              'updated' => date('Y-m-d H:i:s', strtotime('-2 minute')),
           ),
           array(
               'title' => 'Taskle',
