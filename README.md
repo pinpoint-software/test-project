@@ -1,3 +1,11 @@
+[x]. Get map and seeds going for textarea.
+[x]. Copy over URL stuff for the textarea, make sure it saves to DB.  
+[x]. Title displays on link list.
+[x]. URL or Text, but not both.
+[x]. add the ID to the Payload from the DB.
+[]. Make a view for the text, includes title and routed link (from ID column)
+[]. create route for the text view.
+
 # Pinpoint.Links
 
 This is a small project that we ask applicants to complete as part of the
