@@ -32,7 +32,7 @@ class LinkEvent implements LinkEventInterface
         }
 
         // now create the text link
-        // (or the url link...if this is just a plain old url post)
+        // (or the text/url link if this post is only creating a single link)
         $this->commandBus->handle(new SubmitLink(
             $title,
             $url,

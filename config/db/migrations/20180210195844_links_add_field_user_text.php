@@ -15,8 +15,4 @@ class LinksAddFieldUserText extends AbstractMigration
         $links->addColumn('user_text', 'text', array('null' => true))
               ->save();
     }
-
-    public function down()
-    {
-    }
 }

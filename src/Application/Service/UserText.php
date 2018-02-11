@@ -6,7 +6,7 @@ use Application\Domain\Gateway\LinkReadOnly;
 /*
  * class UserText
  *
- * A service class served in respone to the '/text/?id=\d*' route.
+ * A service class served in respone to the '/text/' route.
  *
  *
  */
@@ -25,7 +25,7 @@ class UserText
         $userText = "";
         parse_str($_SERVER['QUERY_STRING'], $query);
         $id = $query['id'];
-        if ($id) {
+        if (preg_match('/\d+/', $id)) {
             $record = $this->linkGateway->getLinkById($id);
         } else {
             $payload = [

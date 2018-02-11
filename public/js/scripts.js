@@ -5,14 +5,41 @@ $(document).ready(function() {
     $('#link-submit-btn').mouseover(linkBtnHandler);
 });
 
-var userWarnUrl = "Sorry to bother you like this, but we thought that you might "
+/*
+ * Message object used to store and return messages to the user
+ */
+var messages = {
+    base  : {
+        warnUrl : "Sorry to bother you like this, but we thought that you might "
                 + "like to know that, since there is already text entered into "
                 + "the 'Text' field below, anything you enter here will be "
                 + "ignored. Unless, of course, you click on the 'Create Both' "
-                + "Links 'button below.";
-var userWarnText = "We can't help but notice that you have already typed "
+                + "Links 'button below.",
+        warnText : "We can't help but notice that you have already typed "
                 + "something into the URL field above. That field will be ignored "
-                + "unless you click the 'Create Both Links' button below.";
+                + "unless you click the 'Create Both Links' button below."
+    },
+
+    warn(type) {
+        if (type === 'url') {
+            return messages.base.warnUrl;
+        } else if (type === 'text') {
+            return messages.base.warnText;
+        }
+    },
+
+    error(type, url = "") {
+        if (type === 'invalid-url') {
+            return "The URL:       " + url + "\nappears to be invalid.\n\n"
+                    + "The url must be formatted as such:"
+                    + "\n\nhttp[s]://[www.]example.com[/path]\n\n"
+                    + "where the values in brackets are optional.\nPlease reformat "
+                    + "your url.";
+        }
+    },
+
+};
+
 /*
  *  inputHandler()
  *
@@ -39,11 +66,11 @@ function inputHandler(ev) {
 
     if (textAndUrlValsNotNull() && (target === 'url')
             && !inputHandler.haveWarned) {
-        alert(userWarnUrl);
+        alert(messages.warn('url'));
         inputHandler.haveWarned = true;
     } else if (textAndUrlValsNotNull() && (target === 'user-text')
             && !inputHandler.haveWarned) {
-        alert(userWarnText);
+        alert(messages.warn('text'));
         inputHandler.haveWarned = true;
     }
 
@@ -53,6 +80,7 @@ function inputHandler(ev) {
         fadeElement('dbl-link-btn-div', 2000, 'out');
     }
 }
+
 /*
  *  linkBtnHandler()
  *
@@ -65,15 +93,10 @@ function linkBtnHandler(ev) {
 
     // validate the url if there is one
     var url = $('#url').val();
-    var badUrlMsg = "The URL:       " + url + "\nappears to be invalid.\n\n"
-                    + "The url must be formatted as such:"
-                    + "\n\nhttp[s]://[www.]example.com[/path]\n\n"
-                    + "where the values in brackets are optional.\nPlease reformat "
-                    + "your url.";
     if(url) {
         var goodUrl = validateUrl(url);
         if (!goodUrl) {
-            alert(badUrlMsg);
+            alert(messages.error('invalid-url', url));
         }
     }
 }
