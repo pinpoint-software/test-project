@@ -1,13 +1,13 @@
 <?php
 namespace Application\Service;
 
-use Application\Domain\Gateway\LinkReadOnly;
+use Application\Domain\Gateway\TextReadOnly;
 
 class TextItem
 {
     private $linkGateway;
 
-    public function __construct(LinkReadOnly $linkGateway)
+    public function __construct(TextReadOnly $linkGateway)
     {
         $this->linkGateway = $linkGateway;
     }
