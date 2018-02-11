@@ -23,6 +23,7 @@ class LinkList
 
         foreach ($links as $link) {
             $payload['links'][] = [
+                'id' => $link->id(),
                 'title' => $link->title(),
                 'url' => $link->url(),
                 'text' => $link->text(),
