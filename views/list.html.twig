@@ -6,7 +6,7 @@
 	{% if link.text %}
     <a href="/text/{{ link.id }}" class="list-group-item">
 	{% else %}
-    <a href="{{ link.url }}" class="list-group-item">
+    <a href="{{ link.url }}" class="list-group-item" target="_blank">
 	{% endif %}
         <strong class="list-group-item-heading">{{ link.title }}</strong><br>
         <small class="list-group-item-text">Submitted {{ link.created | time_diff | default('now') }} by {{ link.firstName }} {{ link.lastName }}</small>
