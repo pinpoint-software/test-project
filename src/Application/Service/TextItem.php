@@ -18,17 +18,17 @@ class TextItem
 
         $payload = [
             'success' => true,
-            'links' => [],
+            'text' => [],
         ];
 
-        foreach ($links as $link) {
-            $payload['links'][] = [
-                'id' => $link->id(),
-                'title' => $link->title(),
-                'text' => $link->text(),
-                'firstName' => $link->submitter()->firstName(),
-                'lastName' => $link->submitter()->lastName(),
-                'created' => $link->created(),
+        $payload['text'][] = [
+                // 'title' => $link->title(),
+                'title' => 'This is the title',
+                // 'content' => $link->text(),
+                'content' => 'And some text...',
+                // 'firstName' => $link->submitter()->firstName(),
+                // 'lastName' => $link->submitter()->lastName(),
+                // 'created' => $link->created(),
             ];
         }
 

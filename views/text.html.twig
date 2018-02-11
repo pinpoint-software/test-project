@@ -5,7 +5,7 @@
 	<!-- TODO: remove this, just for notification -->
 	You clicked on this text:
     <strong class="list-group-item-heading">{{ text.title }}</strong><br>
-    <p>{{ text.text }}</p>
+    <p>{{ text.content }}</p>
     <small class="list-group-item-text">Submitted {{ text.created | time_diff | default('now') }} by {{ text.firstName }} {{ text.lastName }}</small>
 </div>
 {% endblock content %}
