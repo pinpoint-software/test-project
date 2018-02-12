@@ -34,8 +34,11 @@ class Routing extends Module
         $adr->get('ListLinks', '/', Service\LinkList::class)
             ->defaults(['_view' => 'list.html.twig']);
 
-        $adr->get('TextView', '/text/{$id}', Service\TextItem::class )
-			->defaults(['_view' => 'text.html.twig']);
+        $adr->get('TextView', '/text/{$id}', function ($request, $response) {
+			    $id = (int) $request->getAttribute('id');
+			    $response->getBody()->write("You asked for blog entry {$id}.");
+			    return $response;
+			});
 
         $adr->get('LoginForm', '/login/', Service\LoginForm::class)
             ->input(Input\LoginForm::class)
