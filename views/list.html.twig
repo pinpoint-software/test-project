@@ -1,12 +1,33 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-<div class="list-group">
-{% for link in links %}
-    <a href="{{ link.url }}" class="list-group-item">
-        <strong class="list-group-item-heading">{{ link.title }}</strong><br>
-        <small class="list-group-item-text">Submitted {{ link.created | time_diff | default('now') }} by {{ link.firstName }} {{ link.lastName }}</small>
-    </a>
-{% endfor %}
-</div>
+    <div class="list-group">
+        {% for link in links %}
+            <a onclick="openLink('{{ link.url }}')" class="list-group-item">
+                <strong class="list-group-item-heading">{{ link.title }}</strong><br>
+                <small class="list-group-item-text">Submitted {{ link.created | time_diff | default('now') }} by {{ link.firstName }} {{ link.lastName }}</small>
+            </a>
+            {% block javascripts %}
+            <script>
+                function validURL(myURL) {
+                    try{
+                        new URL(myURL);
+                        return true
+                    }catch(e){
+                        return false
+                    }
+                }
+                function openLink(linkText){
+                    if(validURL(linkText)){
+                        return window.open(linkText);
+                    }
+                    else{
+                        var newWind = open(linkText,'_blank');
+                        newWind.document.write(linkText);
+                    }
+                }
+            </script>
+            {% endblock javascripts %}
+        {% endfor %}
+    </div>
 {% endblock content %}
