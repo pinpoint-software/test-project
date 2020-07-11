@@ -25,6 +25,10 @@ class Routing extends Module
         $di->params[Service\LoginSubmit::class] = [
             'userGateway' => $di->lazyNew(UserReadOnly::class),
         ];
+		
+		$di->params[Service\TextPost::class] = [
+            'linkGateway' => $di->lazyNew(LinkReadOnly::class),
+        ];
     }
 
     public function modify(Container $di)
@@ -52,5 +56,9 @@ class Routing extends Module
         $adr->post('LinkSubmit', '/submit/', Service\LinkSubmit::class)
             ->input(Input\LinkSubmit::class)
             ->responder(Responder\GenericRedirect::class);
+			
+		$adr->get('TextPost', '/post/', Service\TextPost::class)
+			->input(Input\TextPost::class)
+            ->defaults(['_view' => 'textpost.html.twig']);
     }
 }
