@@ -16,7 +16,7 @@ class LinkWrite implements LinkWriteGateway
         $this->atlas = $atlas;
     }
 
-    public function create($title, $url, $submitterId, DateTime $created)
+    public function create($title, $url, $text, $submitterId, DateTime $created)
     {
         $links = [];
 
@@ -24,6 +24,7 @@ class LinkWrite implements LinkWriteGateway
 
         $linkRecord->title = $title;
         $linkRecord->url = $url;
+		$linkRecord->text = $text;
         $linkRecord->submitter_id = $submitterId;
         $linkRecord->created = $created->format('Y-m-d H:i:s');
         $linkRecord->updated = $created->format('Y-m-d H:i:s');

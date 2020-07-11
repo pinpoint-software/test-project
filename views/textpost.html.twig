@@ -1,0 +1,14 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+<div class="list-group-item">
+		<div>
+			<strong class="list-group-item-heading">{{ post.title }}</strong><br>
+			<small class="list-group-item-text">Submitted {{ post.created | time_diff | default('now') }} by {{ post.firstName }} {{ post.lastName }}</small>
+		</div>
+		<div>
+			{{ post.text }}
+		</div>
+</div>
+{% endblock content %}

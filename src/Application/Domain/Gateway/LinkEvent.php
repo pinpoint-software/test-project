@@ -3,5 +3,5 @@ namespace Application\Domain\Gateway;
 
 interface LinkEvent
 {
-    public function submit($title, $url, $submitterId);
+    public function submit($title, $url, $text, $submitterId);
 }

@@ -17,6 +17,33 @@ class LinkReadOnly implements LinkReadOnlyGateway
     {
         $this->atlas = $atlas;
     }
+	
+	public function getLinkById(int $id)
+	{
+		$linkRecord = $this->atlas
+            ->select(LinkMapper::Class)
+            ->where('id = ?', $id)
+			->with(['submitter',])
+            ->fetchRecord();
+			
+		return new Link(
+			$linkRecord->id,
+			$linkRecord->title,
+			$linkRecord->url,
+			$linkRecord->text,
+			new User(
+				$linkRecord->submitter->id,
+				$linkRecord->submitter->email,
+				$linkRecord->submitter->password,
+				$linkRecord->submitter->first_name,
+				$linkRecord->submitter->last_name,
+				new DateTime($linkRecord->submitter->created, new DateTimeZone('UTC')),
+				new DateTime($linkRecord->submitter->updated, new DateTimeZone('UTC'))
+			),
+			new DateTime($linkRecord->created, new DateTimeZone('UTC')),
+			new DateTime($linkRecord->updated, new DateTimeZone('UTC'))
+		);
+	}
 
     public function getRecentLinks()
     {
@@ -37,6 +64,7 @@ class LinkReadOnly implements LinkReadOnlyGateway
                 $linkRecord->id,
                 $linkRecord->title,
                 $linkRecord->url,
+				$linkRecord->text,
                 new User(
                     $linkRecord->submitter->id,
                     $linkRecord->submitter->email,

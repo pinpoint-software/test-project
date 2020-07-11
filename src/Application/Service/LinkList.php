@@ -25,6 +25,8 @@ class LinkList
             $payload['links'][] = [
                 'title' => $link->title(),
                 'url' => $link->url(),
+				'text' => $link->text(),
+				'id' => $link->id(),
                 'firstName' => $link->submitter()->firstName(),
                 'lastName' => $link->submitter()->lastName(),
                 'created' => $link->created(),
